@@ -1,6 +1,6 @@
 # youralternative
 
-find alternatives
+Find Alternatives
 
 ## Getting Started
 

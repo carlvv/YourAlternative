@@ -42,13 +42,17 @@ RUN yes | sdkmanager --licenses && \
     sdkmanager \
     "platform-tools" \
     "platforms;android-36" \
-    "build-tools;36.0.0" \
-    "ndk;27.3.13750724"
+    "build-tools;35.0.0" \
+    "ndk;28.2.13676358" \
+    "cmake;3.22.1"
 
 ENV FLUTTER_HOME=/home/$USERNAME/flutter
 ENV PATH=$PATH:$FLUTTER_HOME/bin
 
-RUN git clone https://github.com/flutter/flutter.git -b stable $FLUTTER_HOME
+RUN git clone https://github.com/flutter/flutter.git -b stable --depth=1 $FLUTTER_HOME \
+    && cd $FLUTTER_HOME \
+    && git fetch --depth=1 origin 57c3f8b665259d34b0b3e544ec44e837cfc917f6 \
+    && git checkout 57c3f8b665259d34b0b3e544ec44e837cfc917f6
 
 RUN flutter precache --android
 

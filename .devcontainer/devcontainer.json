@@ -3,10 +3,6 @@
   "build": {
     "dockerfile": "Dockerfile"
   },
-  "runArgs": [
-    "--privileged",
-    "--device=/dev/bus/usb"
-  ],
   "features": {},
   "customizations": {
     "vscode": {

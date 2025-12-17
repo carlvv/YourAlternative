@@ -14,7 +14,7 @@ class MyApp extends StatelessWidget {
       title: 'YourAlternative',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        colorScheme: ColorScheme.dark()
+        colorScheme: ColorScheme.light()
       ),
       home: const LandingPage(), //const weil stateless
     );

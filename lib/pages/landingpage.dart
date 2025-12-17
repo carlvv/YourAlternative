@@ -9,7 +9,9 @@ class LandingPage extends StatelessWidget {
       appBar: AppBar(
         title: Text("YourAlternative"),
         centerTitle: true,
-        backgroundColor: Colors.white
+        leading: IconButton(
+          onPressed:() => {}, 
+          icon: Icon(Icons.arrow_back)),
       ),
     );
   }

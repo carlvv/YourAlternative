@@ -15,7 +15,6 @@
       }
     }
   },
-  "forwardPorts": [5555, 37000],
   "remoteUser": "youralternative",
   "postCreateCommand": "flutter doctor -v",
   "containerEnv": {

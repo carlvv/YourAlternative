@@ -1,0 +1,30 @@
+{
+  "name": "Flutter Android Dev (Debian)",
+  "build": {
+    "dockerfile": "Dockerfile"
+  },
+  "runArgs": [
+    "--privileged",
+    "--device=/dev/bus/usb"
+  ],
+  "features": {},
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "dart-code.dart-code",
+        "dart-code.flutter"
+      ],
+      "settings": {
+        "terminal.integrated.defaultProfile.linux": "bash"
+      }
+    }
+  },
+  "forwardPorts": [5555, 37000],
+  "remoteUser": "youralternative",
+  "postCreateCommand": "flutter doctor -v",
+  "containerEnv": {
+    "ANDROID_HOME": "/home/dev/android-sdk",
+    "ANDROID_SDK_ROOT": "/home/dev/android-sdk",
+    "FLUTTER_HOME": "/home/dev/flutter"
+  }
+}

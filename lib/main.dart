@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:youralternative/common.dart';
 import 'package:youralternative/pages/landingpage.dart';
 
 void main() {
+  prepareData();
   runApp(const YourAlternativeApp());
 }
+
 
 class YourAlternativeApp extends StatelessWidget {
   const YourAlternativeApp({super.key});

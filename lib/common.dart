@@ -1,4 +1,4 @@
-int HIGHEST_ID = 0;
+int _HIGHEST_ID = 0;
 List<Entry> history = []; //TODO speichern
 List<Entry> catalog = [];
 
@@ -11,29 +11,29 @@ class Entry {
   bool _advertisement = false;
   List<Entry> _adjecent = [];
 
-  get id => this._id;
-  get name => this._name;
-  get description => this._description;
-  get price => this._price;
-  get rating => this._rating;
-  get advertisement => this._advertisement;
-  get adjecent => this._adjecent;
+  int get id => _id;
+  String get name => _name;
+  String get description => _description;
+  double get price => _price;
+  int get rating => _rating;
+  bool get advertisement => _advertisement;
+  List<Entry> get adjecent => _adjecent;
 
   Entry(
-    String _name,
-    String __description,
-    double _price,
-    int _rating,
-    bool _advertisement,
-    List<Entry> _adjecent,
+    String name,
+    String description,
+    double price,
+    int rating,
+    bool advertisement,
+    List<Entry> adjecent,
   ) {
-    this._id = ++HIGHEST_ID;
-    this._name = _name;
-    this._description = _description;
-    this._price = _price;
-    this._rating = _rating;
-    this._advertisement = _advertisement;
-    this._adjecent = _adjecent;
+    _id = ++_HIGHEST_ID;
+    _name = name;
+    _description = _description;
+    _price = price;
+    _rating = rating;
+    _advertisement = advertisement;
+    _adjecent = adjecent;
   }
 
   @override
@@ -153,7 +153,7 @@ void prepareData() {
     "Over-Ear-Kopfhörer, Active Noise Cancellation, 20h Akku",
     549.00,
     4,
-    true, // Werbung
+    true,
     [],
   );
   catalog.add(kopfhoererApple);
@@ -189,7 +189,7 @@ void prepareData() {
     "Premium-LED-Lampe, dimmbar, 4 Lichtmodi, Smart Home",
     899.00,
     5,
-    true, // Werbung
+    true,
     [],
   );
   catalog.add(nachttischlampeDyson);
@@ -220,25 +220,73 @@ void prepareData() {
     [],
   );
   catalog.add(deckenleuchteIKEA);
-  kuehlschrankBosch._adjecent = [kuehlschrankSamsung, kuehlschrankLG, kuehlschrankLiebherr];
-  kuehlschrankSamsung._adjecent = [kuehlschrankBosch, kuehlschrankLG, kuehlschrankLiebherr];
-  kuehlschrankLG._adjecent = [kuehlschrankBosch, kuehlschrankSamsung, kuehlschrankLiebherr];
-  kuehlschrankLiebherr._adjecent = [kuehlschrankBosch, kuehlschrankSamsung, kuehlschrankLG];
+  kuehlschrankBosch._adjecent = [
+    kuehlschrankSamsung,
+    kuehlschrankLG,
+    kuehlschrankLiebherr,
+  ];
+  kuehlschrankSamsung._adjecent = [
+    kuehlschrankBosch,
+    kuehlschrankLG,
+    kuehlschrankLiebherr,
+  ];
+  kuehlschrankLG._adjecent = [
+    kuehlschrankBosch,
+    kuehlschrankSamsung,
+    kuehlschrankLiebherr,
+  ];
+  kuehlschrankLiebherr._adjecent = [
+    kuehlschrankBosch,
+    kuehlschrankSamsung,
+    kuehlschrankLG,
+  ];
 
   fernseherSamsung._adjecent = [fernseherSony, fernseherLG, fernseherPhilips];
   fernseherSony._adjecent = [fernseherSamsung, fernseherLG, fernseherPhilips];
   fernseherLG._adjecent = [fernseherSamsung, fernseherSony, fernseherPhilips];
   fernseherPhilips._adjecent = [fernseherSamsung, fernseherSony, fernseherLG];
 
-  kopfhoererSony._adjecent = [kopfhoererBose, kopfhoererSennheiser, kopfhoererApple];
-  kopfhoererBose._adjecent = [kopfhoererSony, kopfhoererSennheiser, kopfhoererApple];
-  kopfhoererSennheiser._adjecent = [kopfhoererSony, kopfhoererBose, kopfhoererApple];
-  kopfhoererApple._adjecent = [kopfhoererSony, kopfhoererBose, kopfhoererSennheiser];
+  kopfhoererSony._adjecent = [
+    kopfhoererBose,
+    kopfhoererSennheiser,
+    kopfhoererApple,
+  ];
+  kopfhoererBose._adjecent = [
+    kopfhoererSony,
+    kopfhoererSennheiser,
+    kopfhoererApple,
+  ];
+  kopfhoererSennheiser._adjecent = [
+    kopfhoererSony,
+    kopfhoererBose,
+    kopfhoererApple,
+  ];
+  kopfhoererApple._adjecent = [
+    kopfhoererSony,
+    kopfhoererBose,
+    kopfhoererSennheiser,
+  ];
 
-  nachttischlampeIKEA._adjecent = [nachttischlampePhilips, nachttischlampeXiaomi, nachttischlampeDyson];
-  nachttischlampePhilips._adjecent = [nachttischlampeIKEA, nachttischlampeXiaomi, nachttischlampeDyson];
-  nachttischlampeXiaomi._adjecent = [nachttischlampeIKEA, nachttischlampePhilips, nachttischlampeDyson];
-  nachttischlampeDyson._adjecent = [nachttischlampeIKEA, nachttischlampePhilips, nachttischlampeXiaomi];
+  nachttischlampeIKEA._adjecent = [
+    nachttischlampePhilips,
+    nachttischlampeXiaomi,
+    nachttischlampeDyson,
+  ];
+  nachttischlampePhilips._adjecent = [
+    nachttischlampeIKEA,
+    nachttischlampeXiaomi,
+    nachttischlampeDyson,
+  ];
+  nachttischlampeXiaomi._adjecent = [
+    nachttischlampeIKEA,
+    nachttischlampePhilips,
+    nachttischlampeDyson,
+  ];
+  nachttischlampeDyson._adjecent = [
+    nachttischlampeIKEA,
+    nachttischlampePhilips,
+    nachttischlampeXiaomi,
+  ];
 
   deckenleuchteOSRAM._adjecent = [deckenleuchtePhilips, deckenleuchteIKEA];
   deckenleuchtePhilips._adjecent = [deckenleuchteOSRAM, deckenleuchteIKEA];

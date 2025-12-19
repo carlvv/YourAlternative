@@ -12,79 +12,61 @@ class LandingPage extends StatelessWidget {
     print("Search");
   }
 
+  //expanded um das widget zu füllen
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text("YourAlternative"),
-        centerTitle: true,
-        /*leading: IconButton(
-          onPressed: () => {print(catalog[0])},
-          icon: Icon(Icons.arrow_back),
-        ),*/
-      ),
+      appBar: AppBar(title: const Text("YourAlternative"), centerTitle: true),
       body: Column(
         children: [
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              IconButton(onPressed: onFilterPressed, icon: Icon(Icons.menu)),
-              Container(width: 20, child: TextField()),
+              IconButton(onPressed: onFilterPressed, icon: const Icon(Icons.menu)),
+              const Expanded(child: TextField()),
               IconButton(
                 onPressed: onSearchPressed,
-                icon: Icon(Icons.arrow_forward),
+                icon: const Icon(Icons.arrow_forward),
               ),
             ],
           ),
-          Row(children: [ReclentlyViewed()]),
+          const Expanded(child: RecentlyViewed()),
         ],
       ),
-
-      /*
-       Container(
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: [
-            IconButton(onPressed: onFilterPressed, icon: Icon(Icons.menu)),
-            Container(width: 20, child: TextField()),
-            IconButton(
-              onPressed: onSearchPressed,
-              icon: Icon(Icons.arrow_forward),
-            ),
-          ],
-        ),
-      ),*/
     );
   }
 }
 
-class ReclentlyViewed extends StatefulWidget {
-  const ReclentlyViewed({super.key});
+class RecentlyViewed extends StatefulWidget {
+  const RecentlyViewed({super.key});
 
   @override
-  State<ReclentlyViewed> createState() => _ReclentlyViewedState();
+  State<RecentlyViewed> createState() => _RecentlyViewedState();
 }
 
-class _ReclentlyViewedState extends State<ReclentlyViewed> {
+class _RecentlyViewedState extends State<RecentlyViewed> {
   @override
   Widget build(BuildContext context) {
-    //von array / datei lesen
-    //irgendwie mit Row() oder so
     List<Widget> historyWidgets = [];
     for (int i = 0; i < history.length; i++) {
-      print(history[i].toString());
       historyWidgets.add(
-        Row(
-          children: [
-            Text(history[i].name),
-            Text(history[i].price.toString()),
-            Text(history[i].rating.toString()),
-          ],
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        Container(
+          width: double.infinity,
+          child: Row(
+            children: [
+              Expanded(child: Text(history[i].name)),
+              Expanded(child: Text(history[i].price.toString())),
+              Expanded(child: Text(history[i].rating.toString())),
+            ],
+          ),
         ),
       );
     }
 
-    return Column(children: historyWidgets);
+    return ListView(
+      padding: const EdgeInsets.all(8),
+      children: historyWidgets,
+    );
   }
 }

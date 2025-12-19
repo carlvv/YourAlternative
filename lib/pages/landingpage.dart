@@ -16,6 +16,11 @@ class LandingPage extends StatelessWidget {
           }, 
           icon: Icon(Icons.arrow_back)),
       ),
+      body: Container(
+        //TODO Suchzeile
+        //TODO spacing
+        child: ReclentlyViewed(),
+      ),
     );
   }
 }
@@ -30,6 +35,8 @@ class ReclentlyViewed extends StatefulWidget {
 class _ReclentlyViewedState extends State<ReclentlyViewed> {
   @override
   Widget build(BuildContext context) {
+    //von array / datei lesen
+    //irgendwie mit Row() oder so
     return const Placeholder();
   }
 }

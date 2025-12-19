@@ -7,7 +7,6 @@ void main() {
   runApp(const YourAlternativeApp());
 }
 
-
 class YourAlternativeApp extends StatelessWidget {
   const YourAlternativeApp({super.key});
 

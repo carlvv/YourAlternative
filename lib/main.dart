@@ -2,8 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:youralternative/common.dart';
 import 'package:youralternative/pages/landingpage.dart';
 
+import 'dart:math';
+
 void main() {
   prepareData();
+  Random random = Random();
+  for (int i = 0; i < 10; i++) {
+    history.add(catalog[random.nextInt(catalog.length)]);
+  }
   runApp(const YourAlternativeApp());
 }
 
@@ -15,11 +21,8 @@ class YourAlternativeApp extends StatelessWidget {
     return MaterialApp(
       title: 'YourAlternative',
       debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        colorScheme: ColorScheme.light(),
-        useMaterial3: true
-      ),
-      home: const LandingPage()
+      theme: ThemeData(colorScheme: ColorScheme.light(), useMaterial3: true),
+      home: const LandingPage(),
     );
   }
 }

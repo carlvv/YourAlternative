@@ -1,5 +1,5 @@
 int _HIGHEST_ID = 0;
-List<Entry> history = []; //TODO speichern
+List<Entry> history = [];
 List<Entry> catalog = [];
 
 class Entry {

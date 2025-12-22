@@ -23,7 +23,10 @@ class LandingPage extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              IconButton(onPressed: onFilterPressed, icon: const Icon(Icons.menu)),
+              IconButton(
+                onPressed: onFilterPressed,
+                icon: const Icon(Icons.menu),
+              ),
               const Expanded(child: TextField()),
               IconButton(
                 onPressed: onSearchPressed,
@@ -46,27 +49,29 @@ class RecentlyViewed extends StatefulWidget {
 }
 
 class _RecentlyViewedState extends State<RecentlyViewed> {
-  @override
-  Widget build(BuildContext context) {
-    List<Widget> historyWidgets = [];
-    for (int i = 0; i < history.length; i++) {
-      historyWidgets.add(
+  List<Widget> _historyWidgets = [];
+  void addToHistory(Entry newItem) {
+    setState(() {
+      _historyWidgets.add(
         Container(
           width: double.infinity,
           child: Row(
             children: [
-              Expanded(child: Text(history[i].name)),
-              Expanded(child: Text(history[i].price.toString())),
-              Expanded(child: Text(history[i].rating.toString())),
+              Expanded(child: Text(newItem.name)),
+              Expanded(child: Text(newItem.price.toString())),
+              Expanded(child: Text(newItem.rating.toString())),
             ],
           ),
         ),
       );
-    }
+    });
+  }
 
+  @override
+  Widget build(BuildContext context) {
     return ListView(
       padding: const EdgeInsets.all(8),
-      children: historyWidgets,
+      children: _historyWidgets,
     );
   }
 }

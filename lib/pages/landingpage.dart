@@ -8,11 +8,17 @@ class LandingPage extends StatelessWidget {
     print("Filter");
   }
 
-  void onSearchPressed() {
+  void onSearchChanged(BuildContext context,  text) {
     print("Search");
+    List<Entry> resList = [];
+    for (int i = 0; i < catalog.length; i++) {
+      if (catalog[i].name == text) {
+        resList = catalog[i].adjecent;
+        break;
+      }
+    }
+    Navigator.pushNamed(context, "/searchresults", arguments: resList);
   }
-
-  //expanded um das widget zu füllen
 
   @override
   Widget build(BuildContext context) {
@@ -27,10 +33,10 @@ class LandingPage extends StatelessWidget {
                 onPressed: onFilterPressed,
                 icon: const Icon(Icons.menu),
               ),
-              const Expanded(child: TextField()),
-              IconButton(
-                onPressed: onSearchPressed,
-                icon: const Icon(Icons.arrow_forward),
+              Expanded(
+                child: TextField(
+                  onSubmitted: (text) => onSearchChanged(context, text),
+                ),
               ),
             ],
           ),
@@ -49,29 +55,32 @@ class RecentlyViewed extends StatefulWidget {
 }
 
 class _RecentlyViewedState extends State<RecentlyViewed> {
-  List<Widget> _historyWidgets = [];
+  List<Entry> _historyItems = []; // Store Entry objects instead of Widgets
+
   void addToHistory(Entry newItem) {
     setState(() {
-      _historyWidgets.add(
-        Container(
-          width: double.infinity,
-          child: Row(
-            children: [
-              Expanded(child: Text(newItem.name)),
-              Expanded(child: Text(newItem.price.toString())),
-              Expanded(child: Text(newItem.rating.toString())),
-            ],
-          ),
-        ),
-      );
+      _historyItems.add(newItem); // Add the Entry object to the list
     });
   }
 
   @override
   Widget build(BuildContext context) {
-    return ListView(
+    return ListView.builder(
       padding: const EdgeInsets.all(8),
-      children: _historyWidgets,
+      itemCount: _historyItems.length,
+      itemBuilder: (context, index) {
+        final item = _historyItems[index];
+        return Container(
+          width: double.infinity,
+          child: Row(
+            children: [
+              Expanded(child: Text(item.name)),
+              Expanded(child: Text(item.price.toString())),
+              Expanded(child: Text(item.rating.toString())),
+            ],
+          ),
+        );
+      },
     );
   }
 }

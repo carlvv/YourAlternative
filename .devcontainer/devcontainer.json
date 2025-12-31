@@ -15,6 +15,9 @@
       }
     }
   },
+  "runArgs": [
+    "--privileged"
+  ],
   "remoteUser": "youralternative",
   "postCreateCommand": "flutter doctor -v",
   "containerEnv": {

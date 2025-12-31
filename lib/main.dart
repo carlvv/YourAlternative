@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:youralternative/common.dart';
 import 'package:youralternative/pages/landingpage.dart';
+import 'package:youralternative/pages/searchresults.dart';
 
 import 'dart:math';
+
+
 
 void main() {
   prepareData();
@@ -23,6 +26,10 @@ class YourAlternativeApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: ThemeData(colorScheme: ColorScheme.light(), useMaterial3: true),
       home: const LandingPage(),
+      routes: {
+        "/landingpage":(context) => const LandingPage(),
+        "/searchresults":(context) => const SearchResultsPage(),
+      },
     );
   }
 }

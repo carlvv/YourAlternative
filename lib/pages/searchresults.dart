@@ -6,9 +6,7 @@ class SearchResultsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // Retrieve the arguments
-    final List<Entry> entries =
-        ModalRoute.of(context)!.settings.arguments as List<Entry>;
+    final List<Entry> entries = ModalRoute.of(context)!.settings.arguments as List<Entry>;
 
     return Scaffold(
       appBar: AppBar(title: const Text("Search Results")),
@@ -19,7 +17,7 @@ class SearchResultsPage extends StatelessWidget {
           return ListTile(
             title: Text(entry.name),
             subtitle: Text(entry.price.toString()),
-            trailing: Text(entry.rating.toString()),
+            trailing: Text(entry.rating.toString() + "/5"),
           );
         },
       ),

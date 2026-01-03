@@ -1,24 +1,62 @@
 import 'package:flutter/material.dart';
 import 'package:youralternative/common.dart';
 
+import 'package:youralternative/pages/filter.dart';
+
 class LandingPage extends StatelessWidget {
   const LandingPage({super.key});
 
-  void onFilterPressed() {
-    print("Filter");
+  void onFilterPressed(BuildContext context) {
+    Navigator.pushNamed(context, "/filterpage");
   }
 
-  void onSearchChanged(BuildContext context,  text) {
+  void onSearchChanged(BuildContext context, text) {
     print("Search");
     List<Entry> resList = [];
-    for (int i = 0; i < catalog.length; i++) {
-      if (catalog[i].name == text) {
-        resList = catalog[i].adjecent;
+    for (Entry entry in catalog) {
+      if (entry.name == text) {
+        if (filterEnergieCheck &&
+            entry.name.allMatches("+").length != filterEnergieSlider) {
+          break;
+        }
+
+        if (filterPreisCheck && entry.price < filterPreisVonSlider ||
+            entry.price > filterPreisBisSlider) {
+          break;
+        }
+
+        if (entry.bildschirmtechnologie != null &&
+            entry.bildschirmtechnologie != "OLED" &&
+            filteroledCheck) {
+          break;
+        }
+
+        if (entry.bildschirmtechnologie != null &&
+            entry.bildschirmtechnologie != "LED" &&
+            filterledCheck) {
+          break;
+        }
+
+        if (entry.bildschirmtechnologie != null &&
+            entry.bildschirmtechnologie != "PLASMA" &&
+            filterplasmaCheck) {
+          break;
+        }
+
+        if (entry.datenschutzfreundlich != null &&
+            entry.datenschutzfreundlich != true &&
+            filterDatenschutzfreundlich) {
+          break;
+        }
+
+        resList = entry.adjecent;
         break;
       }
     }
-    Navigator.pushNamed(context, "/searchresults", arguments: resList);
+    Navigator.pushNamed(context, "/searchresultspage", arguments: resList);
   }
+
+  void onSearchSubmit(BuildContext context, text) {}
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +68,7 @@ class LandingPage extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               IconButton(
-                onPressed: onFilterPressed,
+                onPressed: () => onFilterPressed(context),
                 icon: const Icon(Icons.menu),
               ),
               Expanded(
@@ -38,6 +76,7 @@ class LandingPage extends StatelessWidget {
                   onSubmitted: (text) => onSearchChanged(context, text),
                 ),
               ),
+              IconButton(onPressed: null, icon: Icon(Icons.arrow_forward)),
             ],
           ),
           const Expanded(child: RecentlyViewed()),

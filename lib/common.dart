@@ -2,6 +2,13 @@ int _HIGHEST_ID = 0;
 List<Entry> history = [];
 List<Entry> catalog = [];
 
+class Filter {
+  int? energieklasse = null;
+  String? bildschirmtechnologie = null;
+  int? preis = null;
+  bool? datenschutzfreundlich = null;
+}
+
 class Entry {
   int _id = 0;
   String _name = "";
@@ -10,6 +17,9 @@ class Entry {
   int _rating = 0;
   bool _advertisement = false;
   List<Entry> _adjecent = [];
+  String? _bildschirmtechnologie;
+  bool? _datenschutzfreundlich;
+  String? _energieklasse;
 
   int get id => _id;
   String get name => _name;
@@ -18,6 +28,9 @@ class Entry {
   int get rating => _rating;
   bool get advertisement => _advertisement;
   List<Entry> get adjecent => _adjecent;
+  String? get bildschirmtechnologie => _bildschirmtechnologie;
+  bool? get datenschutzfreundlich => _datenschutzfreundlich;
+  String? get energieklasse => _energieklasse;
 
   Entry(
     String name,
@@ -25,26 +38,37 @@ class Entry {
     double price,
     int rating,
     bool advertisement,
-    List<Entry> adjecent,
-  ) {
+    List<Entry> adjecent, {
+    String? bildschirmtechnologie,
+    bool? datenschutzfreundlich,
+    String? energieklasse,
+  }) {
     _id = ++_HIGHEST_ID;
     _name = name;
-    _description = _description;
+    _description = description;
     _price = price;
     _rating = rating;
     _advertisement = advertisement;
     _adjecent = adjecent;
+    _bildschirmtechnologie = bildschirmtechnologie;
+    _datenschutzfreundlich = datenschutzfreundlich;
+    _energieklasse = energieklasse;
   }
 
   @override
   String toString() {
-    return 'ID: $_id\n'
-        'Name: $_name\n'
-        'Beschreibung: $_description\n'
-        'Preis: $_price\n'
-        'Bewertung: $_rating\n'
-        'Werbung: $_advertisement\n'
-        'Adjacent: ${_adjecent.map((e) => e._id).toList()}\n';
+    return '''
+  Entry #$_id:
+    Name: $_name
+    Beschreibung: $_description
+    Preis: $_price €
+    Bewertung: $_rating/5
+    Werbung: ${_advertisement ? "Ja" : "Nein"}
+    Energieklasse: ${_energieklasse ?? "Nicht angegeben"}
+    Bildschirmtechnologie: ${_bildschirmtechnologie ?? "Nicht angegeben"}
+    Datenschutzfreundlich: ${_datenschutzfreundlich != null ? (_datenschutzfreundlich! ? "Ja" : "Nein") : "Nicht angegeben"}
+    Verwandte Produkte: ${_adjecent.length} Stück
+  ''';
   }
 }
 
@@ -56,6 +80,7 @@ void prepareData() {
     5,
     false,
     [],
+    energieklasse: "A+++",
   );
   catalog.add(kuehlschrankBosch);
   final Entry kuehlschrankSamsung = Entry(
@@ -65,6 +90,7 @@ void prepareData() {
     4,
     true,
     [],
+    energieklasse: "A++",
   );
   catalog.add(kuehlschrankSamsung);
   final Entry kuehlschrankLG = Entry(
@@ -74,6 +100,7 @@ void prepareData() {
     5,
     false,
     [],
+    energieklasse: "A+++",
   );
   catalog.add(kuehlschrankLG);
   final Entry kuehlschrankLiebherr = Entry(
@@ -83,6 +110,7 @@ void prepareData() {
     5,
     false,
     [],
+    energieklasse: "A+++",
   );
   catalog.add(kuehlschrankLiebherr);
   final Entry fernseherSamsung = Entry(
@@ -92,6 +120,9 @@ void prepareData() {
     5,
     true,
     [],
+    bildschirmtechnologie: "QLED",
+    datenschutzfreundlich: false,
+    energieklasse: "A+",
   );
   catalog.add(fernseherSamsung);
   final Entry fernseherSony = Entry(
@@ -101,6 +132,9 @@ void prepareData() {
     5,
     false,
     [],
+    bildschirmtechnologie: "OLED",
+    datenschutzfreundlich: false,
+    energieklasse: "A",
   );
   catalog.add(fernseherSony);
   final Entry fernseherLG = Entry(
@@ -110,6 +144,9 @@ void prepareData() {
     5,
     false,
     [],
+    bildschirmtechnologie: "OLED",
+    datenschutzfreundlich: false,
+    energieklasse: "A",
   );
   catalog.add(fernseherLG);
   final Entry fernseherPhilips = Entry(
@@ -119,6 +156,9 @@ void prepareData() {
     4,
     false,
     [],
+    bildschirmtechnologie: "LED",
+    datenschutzfreundlich: false,
+    energieklasse: "A",
   );
   catalog.add(fernseherPhilips);
   final Entry kopfhoererSony = Entry(
@@ -128,6 +168,7 @@ void prepareData() {
     5,
     false,
     [],
+    datenschutzfreundlich: false,
   );
   catalog.add(kopfhoererSony);
   final Entry kopfhoererBose = Entry(
@@ -137,6 +178,7 @@ void prepareData() {
     4,
     false,
     [],
+    datenschutzfreundlich: false,
   );
   catalog.add(kopfhoererBose);
   final Entry kopfhoererSennheiser = Entry(
@@ -146,6 +188,7 @@ void prepareData() {
     5,
     false,
     [],
+    datenschutzfreundlich: true,
   );
   catalog.add(kopfhoererSennheiser);
   final Entry kopfhoererApple = Entry(
@@ -155,6 +198,7 @@ void prepareData() {
     4,
     true,
     [],
+    datenschutzfreundlich: false,
   );
   catalog.add(kopfhoererApple);
   final Entry nachttischlampeIKEA = Entry(
@@ -164,6 +208,7 @@ void prepareData() {
     3,
     false,
     [],
+    datenschutzfreundlich: true,
   );
   catalog.add(nachttischlampeIKEA);
   final Entry nachttischlampePhilips = Entry(
@@ -173,6 +218,7 @@ void prepareData() {
     4,
     false,
     [],
+    datenschutzfreundlich: false,
   );
   catalog.add(nachttischlampePhilips);
   final Entry nachttischlampeXiaomi = Entry(
@@ -182,6 +228,7 @@ void prepareData() {
     4,
     false,
     [],
+    datenschutzfreundlich: false,
   );
   catalog.add(nachttischlampeXiaomi);
   final Entry nachttischlampeDyson = Entry(
@@ -191,6 +238,7 @@ void prepareData() {
     5,
     true,
     [],
+    datenschutzfreundlich: false,
   );
   catalog.add(nachttischlampeDyson);
   final Entry deckenleuchteOSRAM = Entry(
@@ -200,6 +248,7 @@ void prepareData() {
     4,
     false,
     [],
+    datenschutzfreundlich: true,
   );
   catalog.add(deckenleuchteOSRAM);
   final Entry deckenleuchtePhilips = Entry(
@@ -209,6 +258,7 @@ void prepareData() {
     4,
     false,
     [],
+    datenschutzfreundlich: false,
   );
   catalog.add(deckenleuchtePhilips);
   final Entry deckenleuchteIKEA = Entry(
@@ -218,6 +268,7 @@ void prepareData() {
     3,
     false,
     [],
+    datenschutzfreundlich: true,
   );
   catalog.add(deckenleuchteIKEA);
   kuehlschrankBosch._adjecent = [

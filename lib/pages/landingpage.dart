@@ -15,46 +15,37 @@ class LandingPage extends StatelessWidget {
     Entry entry = catalog.firstWhere((element) => element.name == text);
     List<Entry> resList = [];
 
-    for (Entry alternativeEntry in entry.adjecent) {
+    resList.addAll(entry.adjecent);
+    resList.removeWhere((alternativeEntry) {
       if (filterEnergieCheck &&
-          alternativeEntry.name.allMatches("+").length == filterEnergieSlider) {
-        resList.add(alternativeEntry);
+          alternativeEntry.name.allMatches("+").length != filterEnergieSlider) {
+        return true;
       }
-
-      if (filterPreisCheck && alternativeEntry.price >= filterPreisVonSlider ||
-          alternativeEntry.price <= filterPreisBisSlider) {
-        resList.add(alternativeEntry);
+      if (filterPreisCheck &&
+          !(alternativeEntry.price >= filterPreisVonSlider &&
+              alternativeEntry.price <= filterPreisBisSlider)) {
+        return true;
       }
-
-      if (alternativeEntry.bildschirmtechnologie != null &&
-          alternativeEntry.bildschirmtechnologie == "OLED" &&
-          filteroledCheck) {
-        resList.add(alternativeEntry);
+      if (filteroledCheck && alternativeEntry.bildschirmtechnologie != "OLED") {
+        return true;
       }
-
-      if (alternativeEntry.bildschirmtechnologie != null &&
-          alternativeEntry.bildschirmtechnologie == "LED" &&
-          filterledCheck) {
-        resList.add(alternativeEntry);
+      if (filterledCheck && alternativeEntry.bildschirmtechnologie != "LED") {
+        return true;
       }
-
-      if (alternativeEntry.bildschirmtechnologie != null &&
-          alternativeEntry.bildschirmtechnologie == "PLASMA" &&
-          filterplasmaCheck) {
-        resList.add(alternativeEntry);
+      if (filterplasmaCheck &&
+          alternativeEntry.bildschirmtechnologie != "PLASMA") {
+        return true;
       }
-
-      if (alternativeEntry.datenschutzfreundlich != null &&
-          alternativeEntry.datenschutzfreundlich == true &&
-          filterDatenschutzfreundlich) {
-        resList.add(alternativeEntry);
+      if (filterDatenschutzfreundlich &&
+          (alternativeEntry.datenschutzfreundlich != true)) {
+        return true;
       }
-
       if (filterBewertungCheck &&
-          alternativeEntry.rating == filterBewertungSlider.round()) {
-        resList.add(alternativeEntry);
+          alternativeEntry.rating != filterBewertungSlider.round()) {
+        return true;
       }
-    }
+      return false;
+    });
 
     Navigator.pushNamed(context, "/searchresultspage", arguments: resList);
   }

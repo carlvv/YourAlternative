@@ -8,10 +8,13 @@ bool filterledCheck = false;
 bool filterplasmaCheck = false;
 
 bool filterPreisCheck = false;
-double filterPreisVonSlider = 1.0;
-double filterPreisBisSlider = 1.0;
+double filterPreisVonSlider = 29.99;
+double filterPreisBisSlider = 1499.99;
 
 bool filterDatenschutzfreundlich = false;
+
+bool filterBewertungCheck = false;
+double filterBewertungSlider = 5;
 
 class FilterPage extends StatefulWidget {
   const FilterPage({super.key});
@@ -21,7 +24,6 @@ class FilterPage extends StatefulWidget {
 }
 
 class _FilterPageState extends State<FilterPage> {
-
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -44,7 +46,7 @@ class _FilterPageState extends State<FilterPage> {
                     ),
                     Expanded(
                       child: Slider(
-                        year2023: false,
+                        //year2023: false,
                         value: filterEnergieSlider,
                         max: 5,
                         divisions: 5,
@@ -113,7 +115,7 @@ class _FilterPageState extends State<FilterPage> {
                     ),
                     Expanded(
                       child: Slider(
-                        year2023: false,
+                        //year2023: false,
                         value: filterPreisVonSlider,
                         //TODO nicht reactive auf die aktuellen filter
                         max: 1499.99,
@@ -128,7 +130,7 @@ class _FilterPageState extends State<FilterPage> {
                     ),
                     Expanded(
                       child: Slider(
-                        year2023: false,
+                        //year2023: false,
                         value: filterPreisBisSlider,
                         //TODO nicht reactive auf die aktuellen filter
                         max: 1499.99,
@@ -157,6 +159,38 @@ class _FilterPageState extends State<FilterPage> {
                           filterDatenschutzfreundlich = value!;
                         });
                       },
+                    ),
+                  ],
+                ),
+              ],
+            ),
+            Column(
+              children: [
+                Text("Bewrtung"),
+                Row(
+                  children: [
+                    Checkbox(
+                      value: filterBewertungCheck,
+                      onChanged: (bool? value) {
+                        setState(() {
+                          filterBewertungCheck = value!;
+                        });
+                      },
+                    ),
+                    Expanded(
+                      child: Slider(
+                        //year2023: false,
+                        value: filterBewertungSlider,
+                        max: 5,
+                        min: 1,
+                        divisions: 5,
+                        label: filterBewertungSlider.round().toString(),
+                        onChanged: (double value) {
+                          setState(() {
+                            filterBewertungSlider = value;
+                          });
+                        },
+                      ),
                     ),
                   ],
                 ),

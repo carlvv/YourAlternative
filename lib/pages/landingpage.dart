@@ -12,47 +12,50 @@ class LandingPage extends StatelessWidget {
 
   void onSearchChanged(BuildContext context, text) {
     print("Search");
+    Entry entry = catalog.firstWhere((element) => element.name == text);
     List<Entry> resList = [];
-    for (Entry entry in catalog) {
-      if (entry.name == text) {
-        if (filterEnergieCheck &&
-            entry.name.allMatches("+").length != filterEnergieSlider) {
-          break;
-        }
 
-        if (filterPreisCheck && entry.price < filterPreisVonSlider ||
-            entry.price > filterPreisBisSlider) {
-          break;
-        }
+    for (Entry alternativeEntry in entry.adjecent) {
+      if (filterEnergieCheck &&
+          alternativeEntry.name.allMatches("+").length == filterEnergieSlider) {
+        resList.add(alternativeEntry);
+      }
 
-        if (entry.bildschirmtechnologie != null &&
-            entry.bildschirmtechnologie != "OLED" &&
-            filteroledCheck) {
-          break;
-        }
+      if (filterPreisCheck && alternativeEntry.price >= filterPreisVonSlider ||
+          alternativeEntry.price <= filterPreisBisSlider) {
+        resList.add(alternativeEntry);
+      }
 
-        if (entry.bildschirmtechnologie != null &&
-            entry.bildschirmtechnologie != "LED" &&
-            filterledCheck) {
-          break;
-        }
+      if (alternativeEntry.bildschirmtechnologie != null &&
+          alternativeEntry.bildschirmtechnologie == "OLED" &&
+          filteroledCheck) {
+        resList.add(alternativeEntry);
+      }
 
-        if (entry.bildschirmtechnologie != null &&
-            entry.bildschirmtechnologie != "PLASMA" &&
-            filterplasmaCheck) {
-          break;
-        }
+      if (alternativeEntry.bildschirmtechnologie != null &&
+          alternativeEntry.bildschirmtechnologie == "LED" &&
+          filterledCheck) {
+        resList.add(alternativeEntry);
+      }
 
-        if (entry.datenschutzfreundlich != null &&
-            entry.datenschutzfreundlich != true &&
-            filterDatenschutzfreundlich) {
-          break;
-        }
+      if (alternativeEntry.bildschirmtechnologie != null &&
+          alternativeEntry.bildschirmtechnologie == "PLASMA" &&
+          filterplasmaCheck) {
+        resList.add(alternativeEntry);
+      }
 
-        resList = entry.adjecent;
-        break;
+      if (alternativeEntry.datenschutzfreundlich != null &&
+          alternativeEntry.datenschutzfreundlich == true &&
+          filterDatenschutzfreundlich) {
+        resList.add(alternativeEntry);
+      }
+
+      if (filterBewertungCheck &&
+          alternativeEntry.rating == filterBewertungSlider.round()) {
+        resList.add(alternativeEntry);
       }
     }
+
     Navigator.pushNamed(context, "/searchresultspage", arguments: resList);
   }
 
@@ -76,7 +79,6 @@ class LandingPage extends StatelessWidget {
                   onSubmitted: (text) => onSearchChanged(context, text),
                 ),
               ),
-              IconButton(onPressed: null, icon: Icon(Icons.arrow_forward)),
             ],
           ),
           const Expanded(child: RecentlyViewed()),

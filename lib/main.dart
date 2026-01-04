@@ -3,6 +3,7 @@ import 'package:youralternative/common.dart';
 import 'package:youralternative/pages/filter.dart';
 import 'package:youralternative/pages/landingpage.dart';
 import 'package:youralternative/pages/searchresults.dart';
+import 'package:youralternative/theme/app_theme.dart';
 
 void main() {
   prepareData();
@@ -17,7 +18,7 @@ class YourAlternativeApp extends StatelessWidget {
     return MaterialApp(
       title: 'YourAlternative',
       debugShowCheckedModeBanner: false,
-      theme: ThemeData(
+      /*theme: ThemeData(
         useMaterial3: true,
         colorScheme: ColorScheme.light(),
         textTheme: TextTheme(
@@ -27,7 +28,8 @@ class YourAlternativeApp extends StatelessWidget {
         iconTheme: IconThemeData(
           size: 16
         )
-      ),
+      ),*/
+      theme: buildAppTheme(),
       home: const LandingPage(),
       routes: {
         "/landingpage": (context) => const LandingPage(),

@@ -20,7 +20,11 @@ class _TopBarState extends State<TopBar> {
     });
     Entry? entry;
     try {
-      entry = catalog.firstWhere((element) => element.name == text);
+      for (entry in catalog) {
+        if (entry.name.toLowerCase().split(" ").contains(text.toLowerCase())) {
+          break;
+        }
+      }
     } catch (e) {
       entry = null;
     }
@@ -32,7 +36,6 @@ class _TopBarState extends State<TopBar> {
       } else if (last.name != text) {
         history.add(entry);
       }
-
       resList.addAll(entry.adjecent);
       resList.removeWhere((alternativeEntry) {
         if (filterEnergieCheck &&

@@ -166,7 +166,7 @@ void prepareData() {
     "Noise-Cancelling-Kopfhörer, 30h Akku, Bluetooth 5.2, LDAC",
     399.99,
     5,
-    false,
+    true,
     [],
     datenschutzfreundlich: false,
   );

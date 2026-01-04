@@ -17,12 +17,22 @@ class YourAlternativeApp extends StatelessWidget {
     return MaterialApp(
       title: 'YourAlternative',
       debugShowCheckedModeBanner: false,
-      theme: ThemeData(colorScheme: ColorScheme.light(), useMaterial3: true),
+      theme: ThemeData(
+        useMaterial3: true,
+        colorScheme: ColorScheme.light(),
+        textTheme: TextTheme(
+          titleLarge: TextStyle(fontSize: 26, fontWeight: FontWeight.w600),
+          bodyMedium: TextStyle(fontSize: 16)
+        ),
+        iconTheme: IconThemeData(
+          size: 16
+        )
+      ),
       home: const LandingPage(),
       routes: {
-        "/landingpage":(context) => const LandingPage(),
-        "/searchresultspage":(context) => const SearchResultsPage(),
-        "/filterpage":(context) => const FilterPage(),
+        "/landingpage": (context) => const LandingPage(),
+        "/searchresultspage": (context) => const SearchResultsPage(),
+        "/filterpage": (context) => const FilterPage(),
       },
     );
   }

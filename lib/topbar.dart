@@ -82,7 +82,7 @@ class _TopBarState extends State<TopBar> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        const SizedBox(height: 10),
+        const SizedBox(height: 25),
         const Text(
           "Your Alternative",
           style: TextStyle(fontWeight: FontWeight.w700, fontSize: 20),

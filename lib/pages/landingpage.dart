@@ -3,9 +3,14 @@ import 'package:youralternative/theme/app_theme.dart';
 import 'package:youralternative/common.dart';
 import 'package:youralternative/topbar.dart';
 
-class LandingPage extends StatelessWidget {
+class LandingPage extends StatefulWidget {
   const LandingPage({super.key});
 
+  @override
+  State<LandingPage> createState() => _LandingPageState();
+}
+
+class _LandingPageState extends State<LandingPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -33,7 +38,6 @@ class LandingPage extends StatelessWidget {
                   final item = history[index];
                   return HistoryTile(
                     title: item.name,
-                    //onTap: () => onSearchChanged(context, item.name),
                   );
                 },
               ),

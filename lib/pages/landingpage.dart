@@ -9,34 +9,37 @@ class LandingPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Column(
-        children: [
-          TopBar(),
-          Row(
-            children: [
-              const Icon(Icons.access_time),
-              const SizedBox(width: 10),
-              const Text(
-                "Suchverlauf",
-                style: TextStyle(fontWeight: FontWeight.w600),
-              ),
-            ],
-          ),
-          const SizedBox(height: 12),
-          Expanded(
-            child: ListView.separated(
-              itemCount: history.length,
-              separatorBuilder: (_, __) => const SizedBox(height: 12),
-              itemBuilder: (context, index) {
-                final item = history[index];
-                return HistoryTile(
-                  title: item.name,
-                  onTap: () => onSearchChanged(context, item.name),
-                );
-              },
+      body: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 18),
+        child: Column(
+          children: [
+            TopBar(),
+            Row(
+              children: [
+                const Icon(Icons.access_time),
+                const SizedBox(width: 10),
+                const Text(
+                  "Suchverlauf",
+                  style: TextStyle(fontWeight: FontWeight.w600),
+                ),
+              ],
             ),
-          ),
-        ],
+            const SizedBox(height: 12),
+            Expanded(
+              child: ListView.separated(
+                itemCount: history.length,
+                separatorBuilder: (_, __) => const SizedBox(height: 12),
+                itemBuilder: (context, index) {
+                  final item = history[index];
+                  return HistoryTile(
+                    title: item.name,
+                    //onTap: () => onSearchChanged(context, item.name),
+                  );
+                },
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

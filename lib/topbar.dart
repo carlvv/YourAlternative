@@ -79,47 +79,45 @@ class _TopBarState extends State<TopBar> {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 18),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          const SizedBox(height: 10),
-          const Text(
-            "Your Alternative",
-            style: TextStyle(fontWeight: FontWeight.w700, fontSize: 20),
-            textAlign: TextAlign.center,
-          ),
-          const SizedBox(height: 6),
-          Text(
-            "Finde bessere Alternativen",
-            style: TextStyle(color: AppColors.textSecondary),
-            textAlign: TextAlign.center,
-          ),
-          const SizedBox(height: 22),
-          Row(
-            children: [
-              IconButton(
-                onPressed: () => _onFilterPressed(context),
-                icon: Icon(
-                  Icons.tune,
-                  color: _isFilterActive ? Colors.blue : null,
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: [
+        const SizedBox(height: 10),
+        const Text(
+          "Your Alternative",
+          style: TextStyle(fontWeight: FontWeight.w700, fontSize: 20),
+          textAlign: TextAlign.center,
+        ),
+        const SizedBox(height: 6),
+        Text(
+          "Finde bessere Alternativen",
+          style: TextStyle(color: AppColors.textSecondary),
+          textAlign: TextAlign.center,
+        ),
+        const SizedBox(height: 22),
+        Row(
+          children: [
+            IconButton(
+              onPressed: () => _onFilterPressed(context),
+              icon: Icon(
+                Icons.tune,
+                color: _isFilterActive ? Colors.blue : null,
+              ),
+            ),
+            const SizedBox(width: 14),
+            Expanded(
+              child: TextField(
+                onSubmitted: (value) => _onSearchChanged(context, value),
+                decoration: const InputDecoration(
+                  hintText: "Suche nach Alternativen",
+                  prefixIcon: Icon(Icons.search),
                 ),
               ),
-              const SizedBox(width: 14),
-              Expanded(
-                child: TextField(
-                  onSubmitted: (value) => _onSearchChanged(context, value),
-                  decoration: const InputDecoration(
-                    hintText: "Suche nach Alternativen",
-                    prefixIcon: Icon(Icons.search),
-                  ),
-                ),
-              ),
-            ],
-          ),
-        ],
-      ),
+            ),
+          ],
+        ),
+        SizedBox(height: 10),
+      ],
     );
   }
 }

@@ -10,23 +10,23 @@ class SearchResultsPage extends StatelessWidget {
     final List<Entry> entries =
         ModalRoute.of(context)!.settings.arguments as List<Entry>;
     return Scaffold(
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          TopBar(),
-          Padding(
-            padding: EdgeInsets.all(12.0),
-            child: Text("Ergebnisse"),
-          ),
-          Expanded(
-            child: ListView.builder(
-              itemCount: entries.length,
-              itemBuilder: (context, index) {
-                return EntryCard(entry: entries[index]);
-              },
+      body: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 18),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            TopBar(),
+            Padding(padding: EdgeInsets.all(12.0), child: Text("Ergebnisse")),
+            Expanded(
+              child: ListView.builder(
+                itemCount: entries.length,
+                itemBuilder: (context, index) {
+                  return EntryCard(entry: entries[index]);
+                },
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

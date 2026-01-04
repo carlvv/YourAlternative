@@ -22,7 +22,7 @@ class YourAlternativeApp extends StatelessWidget {
         colorScheme: ColorScheme.light(),
         textTheme: TextTheme(
           titleLarge: TextStyle(fontSize: 26, fontWeight: FontWeight.w600),
-          bodyMedium: TextStyle(fontSize: 16)
+          bodyMedium: TextStyle(fontSize: 16),
         ),
         iconTheme: IconThemeData(
           size: 16

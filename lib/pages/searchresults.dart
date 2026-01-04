@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:youralternative/common.dart';
+import 'package:youralternative/topbar.dart';
 
 class SearchResultsPage extends StatelessWidget {
   const SearchResultsPage({super.key});
@@ -12,7 +13,8 @@ class SearchResultsPage extends StatelessWidget {
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Padding(
+          TopBar(),
+          Padding(
             padding: EdgeInsets.all(12.0),
             child: Text("Ergebnisse"),
           ),

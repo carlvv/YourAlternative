@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:youralternative/common.dart';
-import 'package:youralternative/topbar.dart';
 
 class SearchResultsPage extends StatelessWidget {
   const SearchResultsPage({super.key});
@@ -10,12 +9,12 @@ class SearchResultsPage extends StatelessWidget {
     final List<Entry> entries =
         ModalRoute.of(context)!.settings.arguments as List<Entry>;
     return Scaffold(
+      appBar: createAppBar(context),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 18),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            TopBar(),
             Padding(padding: EdgeInsets.all(12.0), child: Text("Ergebnisse")),
             Expanded(
               child: ListView.builder(

@@ -1,6 +1,24 @@
+import 'package:flutter/material.dart';
+
 int _HIGHEST_ID = 0;
 List<Entry> history = [];
 List<Entry> catalog = [];
+
+AppBar createAppBarLanding() {
+  return AppBar(title: Text("YourAlternative"));
+}
+
+AppBar createAppBar(BuildContext context) {
+  return AppBar(
+    title: Text("YourAlternative"),
+    leading: IconButton(
+      onPressed: () {
+        Navigator.pop(context);
+      },
+      icon: Icon(Icons.arrow_back),
+    ),
+  );
+}
 
 class Filter {
   int? energieklasse = null;

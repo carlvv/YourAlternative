@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:youralternative/theme/app_theme.dart';
 import 'package:youralternative/common.dart';
-import 'package:youralternative/topbar.dart';
+import 'package:youralternative/pages/filter.dart';
 
 class LandingPage extends StatefulWidget {
   const LandingPage({super.key});
@@ -14,11 +14,34 @@ class _LandingPageState extends State<LandingPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: createAppBarLanding(),
+      drawer: Drawer(
+        child: ListView(
+          children: [
+            DrawerHeader(child: Center(child: Text("YourAlternative"))),
+            ListTile(
+              leading: Icon(Icons.tune),
+              title: Text("Filter"),
+              onTap: () {
+                Navigator.pushNamed(context, "/filterpage");
+              },
+            ),
+          ],
+        ),
+      ),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 18),
         child: Column(
           children: [
-            TopBar(),
+            Expanded(
+              child: TextField(
+                onSubmitted: (value) => onSearchChanged(context, value),
+                decoration: const InputDecoration(
+                  hintText: "Suche nach Alternativen",
+                  prefixIcon: Icon(Icons.search),
+                ),
+              ),
+            ),
             Row(
               children: [
                 const Icon(Icons.access_time),
@@ -36,9 +59,7 @@ class _LandingPageState extends State<LandingPage> {
                 separatorBuilder: (_, __) => const SizedBox(height: 12),
                 itemBuilder: (context, index) {
                   final item = history[index];
-                  return HistoryTile(
-                    title: item.name,
-                  );
+                  return HistoryTile(title: item.name);
                 },
               ),
             ),
@@ -47,6 +68,60 @@ class _LandingPageState extends State<LandingPage> {
       ),
     );
   }
+}
+
+void onSearchChanged(BuildContext context, String text) {
+  Entry? entry;
+  try {
+    for (entry in catalog) {
+      if (entry.name.toLowerCase().split(" ").contains(text.toLowerCase())) {
+        break;
+      }
+    }
+  } catch (e) {
+    entry = null;
+  }
+  List<Entry> resList = [];
+  if (entry != null) {
+    Entry? last = history.lastOrNull;
+    if (last == null) {
+      history.add(entry);
+    } else if (last.name != text) {
+      history.add(entry);
+    }
+    resList.addAll(entry.adjecent);
+    resList.removeWhere((alternativeEntry) {
+      if (filterEnergieCheck &&
+          alternativeEntry.name.allMatches("+").length != filterEnergieSlider) {
+        return true;
+      }
+      if (filterPreisCheck &&
+          !(alternativeEntry.price >= filterPreisVonSlider &&
+              alternativeEntry.price <= filterPreisBisSlider)) {
+        return true;
+      }
+      if (filteroledCheck && alternativeEntry.bildschirmtechnologie != "OLED") {
+        return true;
+      }
+      if (filterledCheck && alternativeEntry.bildschirmtechnologie != "LED") {
+        return true;
+      }
+      if (filterplasmaCheck &&
+          alternativeEntry.bildschirmtechnologie != "PLASMA") {
+        return true;
+      }
+      if (filterDatenschutzfreundlich &&
+          (alternativeEntry.datenschutzfreundlich != true)) {
+        return true;
+      }
+      if (filterBewertungCheck &&
+          alternativeEntry.rating != filterBewertungSlider.round()) {
+        return true;
+      }
+      return false;
+    });
+  }
+  Navigator.pushNamed(context, "/searchresultspage", arguments: resList);
 }
 
 class HistoryTile extends StatelessWidget {

@@ -30,7 +30,7 @@ class _LandingPageState extends State<LandingPage> {
         ),
       ),
       body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 18),
+        padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 20),
         child: Column(
           children: [
             Expanded(
@@ -73,20 +73,13 @@ class _LandingPageState extends State<LandingPage> {
 void onSearchChanged(BuildContext context, String text) {
   Entry? entry;
   try {
-    for (entry in catalog) {
-      if (entry.name.toLowerCase().split(" ").contains(text.toLowerCase())) {
-        break;
-      }
-    }
+    entry = catalog.firstWhere((element) => element.name == text);
   } catch (e) {
     entry = null;
   }
   List<Entry> resList = [];
   if (entry != null) {
-    Entry? last = history.lastOrNull;
-    if (last == null) {
-      history.add(entry);
-    } else if (last.name != text) {
+    if (history.isEmpty || history.last.name != text) {
       history.add(entry);
     }
     resList.addAll(entry.adjecent);

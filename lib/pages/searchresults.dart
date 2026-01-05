@@ -68,7 +68,12 @@ class EntryCard extends StatelessWidget {
             ),
             const SizedBox(height: 4),
             Text(entry.description),
-            const SizedBox(height: 8),
+            const SizedBox(height: 4),
+            Text(
+              "${entry.price}€",
+              style: const TextStyle(fontWeight: FontWeight.bold),
+            ),
+            const SizedBox(height: 4),
             Wrap(
               spacing: 8.0,
               children: [

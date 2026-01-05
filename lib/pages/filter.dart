@@ -24,7 +24,7 @@ class FilterPage extends StatefulWidget {
 }
 
 class _FilterPageState extends State<FilterPage> {
-  final List<String> indexToEnergie = ["A", "A+", "A++", "A+++", "A++++"];
+  final List<String> indexToEnergie = ["A", "A+", "A++", "A+++", "A+++"];
 
   @override
   Widget build(BuildContext context) {

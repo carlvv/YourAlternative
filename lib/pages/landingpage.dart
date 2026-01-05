@@ -147,7 +147,9 @@ class HistoryTile extends StatelessWidget {
                   ),
                 ),
               ),
-              const Icon(Icons.search),
+              IconButton(onPressed: () {
+                onSearchChanged(context, title);
+              }, icon: Icon(Icons.search)),
             ],
           ),
         ),

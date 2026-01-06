@@ -61,6 +61,21 @@ class _LandingPageState extends State<LandingPage> {
                 Navigator.pushNamed(context, "/filterpage");
               },
             ),
+            ListTile(
+              leading: Icon(
+                Icons.settings,
+                color: Theme.of(context).colorScheme.onSurface,
+              ),
+              title: Text(
+                "DEBUG: Redraw",
+                style: Theme.of(context).textTheme.titleMedium,
+              ),
+              onTap: () {
+                setState(() {
+                  
+                });
+              },
+            ),
           ],
         ),
       ),

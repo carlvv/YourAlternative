@@ -18,17 +18,6 @@ class YourAlternativeApp extends StatelessWidget {
     return MaterialApp(
       title: 'YourAlternative',
       debugShowCheckedModeBanner: false,
-      /*theme: ThemeData(
-        useMaterial3: true,
-        colorScheme: ColorScheme.light(),
-        textTheme: TextTheme(
-          titleLarge: TextStyle(fontSize: 26, fontWeight: FontWeight.w600),
-          bodyMedium: TextStyle(fontSize: 16),
-        ),
-        iconTheme: IconThemeData(
-          size: 16
-        )
-      ),*/
       theme: buildAppTheme(),
       home: const LandingPage(),
       routes: {

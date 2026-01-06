@@ -14,14 +14,49 @@ class _LandingPageState extends State<LandingPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: createAppBarLanding(),
+      appBar: AppBar(title: Text("YourAlternative")),
       drawer: Drawer(
+        backgroundColor: Theme.of(context).colorScheme.surface,
         child: ListView(
+          padding: EdgeInsets.zero,
           children: [
-            DrawerHeader(child: Center(child: Text("YourAlternative"))),
+            DrawerHeader(
+              decoration: BoxDecoration(
+                color: Theme.of(context).colorScheme.primaryContainer,
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const SizedBox(height: 16),
+                  Text(
+                    "YourAlternative",
+                    style: Theme.of(context).textTheme.headlineSmall?.copyWith(
+                      color: Theme.of(context).colorScheme.onPrimaryContainer,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  const Spacer(),
+                  Text(
+                    "v1.0.0",
+                    style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                      color: Theme.of(
+                        context,
+                      ).colorScheme.onPrimaryContainer.withOpacity(0.7),
+                    ),
+                  ),
+                ],
+              ),
+            ),
             ListTile(
-              leading: Icon(Icons.tune),
-              title: Text("Filter"),
+              leading: Icon(
+                Icons.tune,
+                color: Theme.of(context).colorScheme.onSurface,
+              ),
+              title: Text(
+                "Filter",
+                style: Theme.of(context).textTheme.titleMedium,
+              ),
+              trailing: const Icon(Icons.chevron_right),
               onTap: () {
                 Navigator.pushNamed(context, "/filterpage");
               },
@@ -33,7 +68,8 @@ class _LandingPageState extends State<LandingPage> {
         padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 20),
         child: Column(
           children: [
-            Expanded(
+            Flexible(
+              fit: FlexFit.loose,
               child: TextField(
                 onSubmitted: (value) => onSearchChanged(context, value),
                 decoration: const InputDecoration(
@@ -42,6 +78,7 @@ class _LandingPageState extends State<LandingPage> {
                 ),
               ),
             ),
+            const SizedBox(height: 20),
             Row(
               children: [
                 const Icon(Icons.access_time),
@@ -147,9 +184,12 @@ class HistoryTile extends StatelessWidget {
                   ),
                 ),
               ),
-              IconButton(onPressed: () {
-                onSearchChanged(context, title);
-              }, icon: Icon(Icons.search)),
+              IconButton(
+                onPressed: () {
+                  onSearchChanged(context, title);
+                },
+                icon: Icon(Icons.search),
+              ),
             ],
           ),
         ),

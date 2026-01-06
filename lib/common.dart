@@ -4,10 +4,6 @@ int _HIGHEST_ID = 0;
 List<Entry> history = [];
 List<Entry> catalog = [];
 
-AppBar createAppBarLanding() {
-  return AppBar(title: Text("YourAlternative"));
-}
-
 AppBar createAppBar(BuildContext context) {
   return AppBar(
     title: Text("YourAlternative"),

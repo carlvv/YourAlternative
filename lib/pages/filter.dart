@@ -250,7 +250,9 @@ class _FilterPageState extends State<FilterPage> {
                           ),
                         ],
                       ),
-                      Expanded(
+
+                      Padding(
+                        padding: const EdgeInsets.only(top: 18, bottom: 10),
                         child: Column(
                           children: [
                             Text(

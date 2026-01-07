@@ -24,6 +24,7 @@ class YourAlternativeApp extends StatelessWidget {
         "/landingpage": (context) => const LandingPage(),
         "/searchresultspage": (context) => const SearchResultsPage(),
         "/filterpage": (context) => const FilterPage(),
+        "/catalog": (context) => const CatalogPage(),
       },
     );
   }

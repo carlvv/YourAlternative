@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:youralternative/common.dart';
 
 double filterEnergieSlider = 1;
 bool filterEnergieCheck = false;
@@ -251,6 +250,15 @@ class _FilterPageState extends State<FilterPage> {
                           ),
                         ],
                       ),
+                      Expanded(
+                        child: Column(
+                          children: [
+                            Text(
+                              "${filterPreisVonSlider.round()} bis ${filterPreisBisSlider.round()}",
+                            ),
+                          ],
+                        ),
+                      ),
 
                       _sectionTitle(Icons.shield_outlined, "Datenschutz"),
                       CheckboxListTile(
@@ -262,16 +270,6 @@ class _FilterPageState extends State<FilterPage> {
                           () => filterDatenschutzfreundlich = v ?? false,
                         ),
                       ),
-
-                      _sectionTitle(Icons.lock_outline, "Sicherheit"),
-                      const Padding(
-                        padding: EdgeInsets.only(left: 2),
-                        child: Text(
-                          "Verschlüsselung",
-                          style: TextStyle(color: Colors.black54),
-                        ),
-                      ),
-
                       _sectionTitle(Icons.star_outline, "Bewertung"),
                       Row(
                         children: [

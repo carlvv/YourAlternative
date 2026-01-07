@@ -160,7 +160,7 @@ void prepareData() {
     [],
     bildschirmtechnologie: "OLED",
     datenschutzfreundlich: false,
-    energieklasse: "A",
+    energieklasse: "A+",
   );
   catalog.add(fernseherLG);
   final Entry fernseherPhilips = Entry(

@@ -63,6 +63,23 @@ class _LandingPageState extends State<LandingPage> {
             ),
             ListTile(
               leading: Icon(
+                Icons.list,
+                color: Theme.of(context).colorScheme.onSurface,
+              ),
+              title: Text(
+                "Alle Produkte",
+                style: Theme.of(context).textTheme.titleMedium,
+              ),
+              trailing: const Icon(Icons.chevron_right),
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const CatalogPage()),
+                );
+              },
+            ),
+            ListTile(
+              leading: Icon(
                 Icons.settings,
                 color: Theme.of(context).colorScheme.onSurface,
               ),
@@ -71,9 +88,7 @@ class _LandingPageState extends State<LandingPage> {
                 style: Theme.of(context).textTheme.titleMedium,
               ),
               onTap: () {
-                setState(() {
-                  
-                });
+                setState(() {});
               },
             ),
           ],
@@ -137,25 +152,34 @@ void onSearchChanged(BuildContext context, String text) {
     resList.addAll(entry.adjecent);
     resList.removeWhere((alternativeEntry) {
       if (filterEnergieCheck &&
-          alternativeEntry.name.allMatches("+").length != filterEnergieSlider) {
+          alternativeEntry.energieklasse != null &&
+          alternativeEntry.energieklasse!.split("+").length ==
+              filterEnergieSlider) {
         return true;
       }
+
       if (filterPreisCheck &&
           !(alternativeEntry.price >= filterPreisVonSlider &&
               alternativeEntry.price <= filterPreisBisSlider)) {
         return true;
       }
-      if (filteroledCheck && alternativeEntry.bildschirmtechnologie != "OLED") {
+      if (filteroledCheck &&
+          alternativeEntry.bildschirmtechnologie != null &&
+          alternativeEntry.bildschirmtechnologie != "OLED") {
         return true;
       }
-      if (filterledCheck && alternativeEntry.bildschirmtechnologie != "LED") {
+      if (filterledCheck &&
+          alternativeEntry.bildschirmtechnologie != null &&
+          alternativeEntry.bildschirmtechnologie != "LED") {
         return true;
       }
       if (filterplasmaCheck &&
+          alternativeEntry.bildschirmtechnologie != null &&
           alternativeEntry.bildschirmtechnologie != "PLASMA") {
         return true;
       }
       if (filterDatenschutzfreundlich &&
+          alternativeEntry.datenschutzfreundlich != null &&
           (alternativeEntry.datenschutzfreundlich != true)) {
         return true;
       }
@@ -207,6 +231,34 @@ class HistoryTile extends StatelessWidget {
               ),
             ],
           ),
+        ),
+      ),
+    );
+  }
+}
+
+class CatalogPage extends StatelessWidget {
+  const CatalogPage({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: createAppBar(context),
+      body: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 20),
+        child: Column(
+          children: [
+            Expanded(
+              child: ListView.separated(
+                itemCount: catalog.length,
+                separatorBuilder: (_, __) => const SizedBox(height: 12),
+                itemBuilder: (context, index) {
+                  final item = catalog[index];
+                  return HistoryTile(title: item.name);
+                },
+              ),
+            ),
+          ],
         ),
       ),
     );
